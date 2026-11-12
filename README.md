@@ -76,3 +76,7 @@ ruff format --check .
 
 The submission should include the LLM conversation transcript separately, as required
 by the assignment.
+
+## AI assistance
+
+[Codex conversation transcript](docs/ai-conversations/codex.md)
