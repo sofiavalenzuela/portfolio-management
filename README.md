@@ -34,6 +34,37 @@ trade quantity = |target value - current value| ÷ price
 Stocks held but absent from target allocations are sold. Stocks present in target
 allocations but absent from holdings are bought.
 
+## Usage
+
+```python
+from decimal import Decimal
+
+from portfolio_management import Holding, Portfolio, Stock, TargetAllocation
+
+meta = Stock("META")
+aapl = Stock("AAPL")
+portfolio = Portfolio(
+    holdings=(
+        Holding(meta, Decimal("8")),
+        Holding(aapl, Decimal("2")),
+    ),
+    target_allocations=(
+        TargetAllocation(meta, Decimal("0.40")),
+        TargetAllocation(aapl, Decimal("0.60")),
+    ),
+)
+
+plan = portfolio.calculate_rebalance_plan(
+    {"META": Decimal("100"), "AAPL": Decimal("100")}
+)
+
+for trade in plan.trades:
+    print(trade.side.value, trade.stock.symbol, trade.quantity)
+
+# BUY AAPL 4
+# SELL META 4
+```
+
 ## Validation and edge cases
 
 Construction rejects empty symbols, invalid or duplicate holding/allocation elements,

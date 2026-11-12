@@ -1792,3 +1792,43 @@ Already committed as:
 `930f83d Validate portfolio elements`
 
 The working tree is clean.
+
+> commit
+
+<details><summary>2 previous messages</summary>
+
+> I’ll check for any uncommitted changes and commit them if present.
+>
+> <details><summary>Ran 4 commands</summary>
+>
+> - Ran `git status --short && git log -1 --oneline`
+> - Ran `git add docs/ai-conversations/codex.md`
+> - Ran `git commit -m "Update Codex conversation transcript"`
+> - Ran `git status --short && git log -1 --oneline`
+>
+> </details>
+</details>
+
+Committed the transcript update:
+
+`853c73e Update Codex conversation transcript`
+
+Working tree is clean.
+
+> add usage example to readme showing how to construct a Portfolio, provide prices, and obtain a RebalancePlan
+
+<details><summary>2 previous messages</summary>
+
+> I’ll add a compact, executable README example using the public API: construct holdings and targets, supply a decimal price map, calculate the plan, and inspect proposed trades.
+>
+> <details><summary>Edited a file, ran a command</summary>
+>
+> - Wrote `./README.md` (+31 -0)
+> - Ran `git diff --check && ./.venv/bin/pytest`
+>
+> </details>
+</details>
+
+Added an executable usage example to [README.md](./README.md:37) showing portfolio construction, price input, plan calculation, and the resulting buy/sell trades.
+
+`pytest` still passes: 34 tests.
