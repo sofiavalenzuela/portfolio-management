@@ -1698,3 +1698,97 @@ A byte-for-byte raw chat export is not accessible from this workspace, so the tr
 I can’t guarantee a byte-for-byte transcript from the chat UI: this workspace has no raw conversation-export access, and I shouldn’t present reconstructed text as the original.
 
 The current file is therefore not suitable as an “actual message text” transcript. Please export/copy the conversation from the chat UI and provide it, or authorize me to replace the file with that supplied export.
+
+> commit
+
+<details><summary>4 previous messages</summary>
+
+> I’ll commit the current documentation changes—the README link and the Codex conversation record—without changing the implementation.
+>
+> <details><summary>Ran 3 commands</summary>
+>
+> - Ran `git status --short && git diff --check`
+> - Ran `git add README.md docs/ai-conversations/codex.md`
+> - Ran `git commit -m "Document Codex assistance"`
+>
+> </details>
+>
+> The documentation commit was created. I’ll confirm the repository is clean and report the commit identifier.
+>
+> <details><summary>Ran a command</summary>
+>
+> - Ran `git status --short && git log -1 --oneline`
+>
+> </details>
+</details>
+
+Committed the documentation changes.
+
+`74cf814 Document Codex assistance`
+
+Working tree is clean.
+
+> update the README to accurately document the internal use of Fraction alongside Decimal, and add validation for invalid elements in Portfolio holdings and target_allocations, with tests for both cases. Keep the implementation simple and avoid unrelated changes
+
+<details><summary>2 previous messages</summary>
+
+> I’ll add explicit element-type checks before portfolio structural validation, cover invalid holding and allocation entries, and clarify that `Fraction` is used internally only to preserve exact rebalance direction and existence while the public model remains `Decimal`-based.
+>
+> <details><summary>Edited 3 files, explored a search, ran 3 commands</summary>
+>
+> <details><summary>Explored a search</summary>
+>
+> - Searched for `Validation|Precision|def _validate_structure|test_rejects_empty` in `README.md`
+>
+> </details>
+>
+> - Wrote `./README.md` (+14 -13)
+> - Wrote `./src/portfolio_management/portfolio.py` (+9 -0)
+> - Wrote `./tests/test_portfolio.py` (+15 -0)
+>
+> - Ran `./.venv/bin/ruff format .`
+>
+> - Ran `./.venv/bin/ruff check .`
+>
+> - Ran `./.venv/bin/pytest`
+>
+> </details>
+</details>
+
+Updated the README to describe `Fraction` accurately: it is internal-only for exact trade-difference comparison; public inputs and outputs remain `Decimal`.
+
+Added explicit `Portfolio` validation for invalid elements in:
+
+- `holdings` — must contain `Holding` instances
+- `target_allocations` — must contain `TargetAllocation` instances
+
+Added tests for both cases.
+
+Verification passed:
+
+```text
+34 passed
+ruff check .              → passed
+ruff format .             → passed
+```
+
+> commit
+
+<details><summary>2 previous messages</summary>
+
+> I’ll commit the README clarification, portfolio validation, and their tests as the next local commit.
+>
+> <details><summary>Ran 3 commands</summary>
+>
+> - Ran `git status --short && git diff --check`
+> - Ran `git log -2 --oneline`
+> - Ran `git show --stat --oneline --summary HEAD`
+>
+> </details>
+</details>
+
+Already committed as:
+
+`930f83d Validate portfolio elements`
+
+The working tree is clean.
