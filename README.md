@@ -36,9 +36,10 @@ allocations but absent from holdings are bought.
 
 ## Validation and edge cases
 
-Construction rejects empty symbols, duplicate holdings or allocations, and non-positive
-or non-finite `Decimal` quantities and weights. At least one target is required; each
-weight is at most `1`, and all weights must sum mathematically exactly to `1`.
+Construction rejects empty symbols, invalid or duplicate holding/allocation elements,
+and non-positive or non-finite `Decimal` quantities and weights. At least one target is
+required; each weight is at most `1`, and all weights must sum mathematically exactly to
+`1`.
 
 Calculation requires a price mapping with one finite, positive `Decimal` price for every
 held or targeted stock. Missing, invalid, conflicting, or non-mapping price input raises
@@ -52,16 +53,16 @@ most one proposed trade per stock.
 
 ## Precision
 
-All calculations use `Decimal`, not binary floating-point. Target weights have no
-artificial decimal-place limit. Rebalance calculations use a fixed local
-28-significant-digit, half-even decimal context, so results do not depend on a caller's
-mutable Decimal settings. Decimal overflow and underflow are reported as calculation
-validation errors rather than leaking low-level arithmetic exceptions. Plans return the
-resulting fractional-share quantities without applying a broker-specific trade
-increment. Trade direction and existence are derived from the exact rational values of
-the supplied decimals, preventing a very small non-zero rebalance difference from being
-lost beside a large holding. Broker rounding, cash, fees, and execution belong to a
-future layer.
+Public prices, quantities, weights, and plan values use `Decimal`, not binary
+floating-point. Target weights have no artificial decimal-place limit. Rebalance
+calculations use a fixed local 28-significant-digit, half-even decimal context, so
+results do not depend on a caller's mutable Decimal settings. Decimal overflow and
+underflow are reported as calculation validation errors rather than leaking low-level
+arithmetic exceptions. Internally, `Fraction` is used only to compare exact portfolio
+value differences and choose trade direction, preventing a very small non-zero
+difference from being lost beside a large holding. Plans still return `Decimal`
+fractional-share quantities without applying a broker-specific trade increment. Broker
+rounding, cash, fees, and execution belong to a future layer.
 
 ## Development
 

@@ -290,6 +290,21 @@ def test_rejects_empty_and_duplicate_target_allocations() -> None:
         )
 
 
+def test_rejects_invalid_holding_and_target_allocation_elements() -> None:
+    stock = Stock("META")
+    valid_holding = Holding(stock, Decimal("1"))
+    valid_allocation = TargetAllocation(stock, Decimal("1"))
+
+    with pytest.raises(PortfolioValidationError, match="holdings must be Holding instances"):
+        Portfolio(holdings=(valid_holding, stock), target_allocations=(valid_allocation,))
+
+    with pytest.raises(
+        PortfolioValidationError,
+        match="target allocations must be TargetAllocation instances",
+    ):
+        Portfolio(holdings=(valid_holding,), target_allocations=(valid_allocation, stock))
+
+
 def test_rejects_duplicate_holdings_and_target_total_that_is_not_exactly_one() -> None:
     stock = Stock("META")
 

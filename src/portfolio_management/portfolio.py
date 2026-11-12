@@ -190,6 +190,14 @@ class Portfolio:
         return RebalancePlan(total_portfolio_value=total_value, trades=trades)
 
     def _validate_structure(self) -> None:
+        if any(not isinstance(holding, Holding) for holding in self.holdings):
+            raise PortfolioValidationError("Portfolio holdings must be Holding instances.")
+        if any(
+            not isinstance(allocation, TargetAllocation) for allocation in self.target_allocations
+        ):
+            raise PortfolioValidationError(
+                "Portfolio target allocations must be TargetAllocation instances."
+            )
         if not self.target_allocations:
             raise PortfolioValidationError("Portfolio must have at least one target allocation.")
         _require_unique_symbols(self.holdings, "holdings")
